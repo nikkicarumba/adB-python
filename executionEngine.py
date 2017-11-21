@@ -104,12 +104,12 @@ def selectQuery(tableName,columns,whereClause,orderby):
 							if len(tokens) != 2 :
 								raise Exception('invalid format')
 							else :
-								tok1 = int(tokens[0])
-								tok2 = int(tokens[1])
-								if len(str(tok1)) != 4:
+								tok1 = tokens[0]
+								tok2 = tokens[1]
+								if len(str(tok1)) > 6:
 									raise Exception('invalid format')
 								else:
-									if len(str(tok2)) != 4:
+									if len(str(tok2)) > 6:
 										raise Exception('invalid format')
 								validateTime(tok1)
 								validateTime(tok2)
@@ -378,10 +378,10 @@ def insertDataTypeChecker(table,columns,values):
 						else :
 							tok1 = tokens[0]
 							tok2 = tokens[1]
-							if len(str(tok1)) != 4:
+							if len(str(tok1)) > 6:
 								raise Exception('invalid format')
 							else:
-								if len(str(tok2)) != 4:
+								if len(str(tok2)) > 6:
 									raise Exception('invalid format')
 							validateTime(tok1)
 							validateTime(tok2)
