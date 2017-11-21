@@ -98,24 +98,24 @@ def selectQuery(tableName,columns,whereClause,orderby):
 				elif dataTypeChecker(whereClause[1]) == 'varchar':
 					if len(newStr) > 50 :
 						print('values must be less than 50 characters')
-					else:
-						if '-' in newStr:
-							tokens = newStr.split('-')
+					else:		
+						if '-' in value:
+							tokens = value.split('-')
 							if len(tokens) != 2 :
 								raise Exception('invalid format')
 							else :
-								tok1 = int(tokens[0])
-								tok2 = int(tokens[1])
+								tok1 = tokens[0]
+								tok2 = tokens[1]
 								if len(str(tok1)) != 4:
 									raise Exception('invalid format')
 								else:
-									if len(str(tok2)) != 5:
+									if len(str(tok2)) != 4:
 										raise Exception('invalid format')
 								validateTime(tok1)
 								validateTime(tok2)
 								tableData= tableData[tableData[whereClause[1]] == newStr]#.head()
-								print(tableData[columns].replace(np.nan, '', regex=True))
-						else:						
+							print(tableData[columns].replace(np.nan, '', regex=True))
+						else:
 							tableData= tableData[tableData[whereClause[1]] == newStr]#.head()
 							print(tableData[columns].replace(np.nan, '', regex=True))
 				elif dataTypeChecker(whereClause[1]) == 'id':
@@ -370,6 +370,21 @@ def insertDataTypeChecker(table,columns,values):
 			elif dataTypeChecker(columns[counter]) == 'varchar':
 				if len(value) > 50:
 					raise Exception('must be of 50 charcaters or less')
+				else:
+					if '-' in value:
+						tokens = value.split('-')
+						if len(tokens) != 2 :
+							raise Exception('invalid format')
+						else :
+							tok1 = tokens[0]
+							tok2 = tokens[1]
+							if len(str(tok1)) != 4:
+								raise Exception('invalid format')
+							else:
+								if len(str(tok2)) != 4:
+									raise Exception('invalid format')
+							validateTime(tok1)
+							validateTime(tok2)
 
 				if (columns[counter]=='CNo' and table=='COURSE'):
 
@@ -427,6 +442,8 @@ def insertDataTypeChecker(table,columns,values):
 		if(str(error)=='StudNo already exists.'):
 			print(error)
 		elif(str(error)=='CNo already exists.'):
+			print(error)
+		elif(str(error)=='Incorrect time format, should be H:M'):
 			print(error)
 		else:
 			if dataTypeChecker(columns[counter]) == 'int':
