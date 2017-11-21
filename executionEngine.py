@@ -22,7 +22,7 @@ def dataTypeChecker(column):
     dataType['Action'] = 'varchar'
     dataType['DateFiled'] = 'date'
     dataType['DateResolved'] = 'date'
-    dataType['CNo'] = 'int'
+    dataType['CNo'] = 'varchar'
     dataType['CTitle'] = 'varchar'
     dataType['CDesc'] = 'varchar'
     dataType['NoOfUnits'] = 'int'
